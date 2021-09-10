@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,0">
+    <title>Document</title>
+    <style>
+        .radio {
+        color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../home/">Home</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <div class="control">
+                <form class="d-flex" method=POST action="{%url 'busqueda' %}">
+                    {% csrf_token %}
+                    <input class="input is-primary" type="text" id="text1" name="searched2" placeholder="Search">
+                    <button id="botciu" class="btn btn-outline-success my-2 my-sm-0" type="submit">Ciudad</button>
+                </form>
+            </div>
+        </div>
+        <div class="navbar-collapse navbar-right">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <form class="d-flex" method=POST action="{%url 'busqueda1' %}">
+                        {% csrf_token %}
+                        <input class="input is-primary" type="text" id="text1" name="searched" placeholder="Search">
+                        <button id="botus" class="btn btn-outline-success my-2 my-sm-0" type="submit">Usuario</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+            
+    <div class="container">
+        <div class="row">
+            <strong>Busqueda</strong> <br>
+            {% for i in response %}
+            <a href="../profile/{{ i.id }}/" class="list-group-item list-group-item-action">{{i.name}} {{i.lastName}}</a>
+            {% endfor %} 
+        </div>
+    </div>
+
+
+</body>
+</html>
