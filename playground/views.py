@@ -68,33 +68,14 @@ def city(request, id_city):
 def busc(request):
     if request.method == "POST":
         searched = request.POST['searched2']
-        print(searched)
     response=requests.get('https://us-central1-taller-integracion-310700.cloudfunctions.net/tarea-1-2021-2/26417/cities?q={0}'.format(searched)).json()
     return render(request, 'busqueda.html', {'response':response})
 
 def busc1(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        print(searched)
 
-    sigo = True
-    count =2
-    lista =[]
-    response = requests.get('https://us-central1-taller-integracion-310700.cloudfunctions.net/tarea-1-2021-2/26417/users?_page=1').json()
-    while sigo==True:
-        response1 = requests.get('https://us-central1-taller-integracion-310700.cloudfunctions.net/tarea-1-2021-2/26417/users?_page={0}'.format(count)).json()
-        if len(response1) == 10:
-            response+=response1
-            count+=1
-        elif len(response1) < 10:
-            response+=response1
-            sigo = False
-        elif len(response1) == 0:
-            sigo = False 
-    for elem in response:
-        if searched:
-            if searched in elem['name'].lower() or searched in elem['lastName'].lower():
-                lista.append(elem)
-    return render(request, 'busqueda1.html', {'response':lista})
+    response = requests.get('https://us-central1-taller-integracion-310700.cloudfunctions.net/tarea-1-2021-2/26417/users?q={0}'.format(searched)).json()
+    return render(request, 'busqueda1.html', {'response':response})
 
     
